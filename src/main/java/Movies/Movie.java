@@ -16,6 +16,16 @@ public class Movie {
         this.premiereDate = premiereDate;
     }
 
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "title='" + title + '\'' +
+                ", director=" + director +
+                ", actorList=" + actorList +
+                ", premiereDate=" + premiereDate +
+                '}';
+    }
+
     public String getTitle() {
         return title;
     }

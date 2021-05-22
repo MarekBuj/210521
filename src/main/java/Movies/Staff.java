@@ -33,4 +33,12 @@ public abstract class Staff {
 
     public abstract void setSalary(double salary);
 
+    @Override
+    public String toString() {
+        return "Staff{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", salary=" + salary +
+                '}';
+    }
 }
