@@ -37,7 +37,23 @@ public class MovieDB {
     }
 
     private static void calculateMovieBudget() {
-        System.out.println("Ile kosztowało wyprodukowanie danego filmu");
+        System.out.println("Ile kosztowało wyprodukowanie danego filmu\n" +
+                "Podaj nazwę filmu:");
+        Scanner scan = new Scanner(System.in);
+        String movieTitle = scan.nextLine();
+
+        double movieBudget = 0;
+
+        for (Movie movie : movieLibrary) {
+            if (movie.getTitle().equals(movieTitle)) {
+                for (Staff staff : movie.staffList) {
+                    movieBudget += staff.getSalary();
+                }
+            }
+        }
+
+        System.out.println("Budżet poszukiwanego filmu to: " + movieBudget);
+
     }
 
     private static void findFilmForActor() {
@@ -46,10 +62,12 @@ public class MovieDB {
         Scanner firstOrLastNameScn = new Scanner(System.in);
         String firstOrLastNameString = firstOrLastNameScn.nextLine();
 
-        for(Movie movie : movieLibrary){
-            for (Actor actor : movie.getActorList()) {
-                if (actor.getFirstName().equals(firstOrLastNameString) || actor.getLastName().equals(firstOrLastNameString)){
-                    System.out.println(movie);
+        for (Movie movie : movieLibrary) {
+            for (Staff staff : movie.getStaffList()) {
+                if (staff.getFirstName().equals(firstOrLastNameString) || staff.getLastName().equals(firstOrLastNameString)) {
+                    if (staff instanceof Actor) {
+                        System.out.println(movie);
+                    }
                 }
             }
         }
@@ -70,29 +88,29 @@ public class MovieDB {
         String name = title.nextLine();
 
         for (Movie movie : movieLibrary) {
-            if (name.equals(movie.getTitle())){
+            if (name.equals(movie.getTitle())) {
                 System.out.println(movie);
             }
         }
     }
 
     public static void prepareMovieData() {
-        Actor tomCriuze = new Actor("Tomi", "Cruzi", 10000);
-        Actor tomHanks = new Actor("Tomi", "Hanks", 15000);
-        Actor juliaRoberts = new Actor("Julia", "Roberts", 20000);
-        Actor nataliaPortman = new Actor("Natalia", "Portman", 5000);
-        Actor stevenSegal = new Actor("Steven", "Segal", 100000);
+        Staff tomCriuze = new Actor("Tomi", "Cruzi", 10000);
+        Staff tomHanks = new Actor("Tomi", "Hanks", 15000);
+        Staff juliaRoberts = new Actor("Julia", "Roberts", 20000);
+        Staff nataliaPortman = new Actor("Natalia", "Portman", 5000);
+        Staff stevenSegal = new Actor("Steven", "Segal", 100000);
 
         Director stevenSpilberg = new Director("Steven", "Spielberg", 30000);
         Director quentinTarantino = new Director("Quentin", "Tarantino", 30000);
 
-        Movie rambo = new Movie("Rambo", stevenSpilberg,
-                Arrays.asList(stevenSegal, juliaRoberts, tomHanks), LocalDate.of(1985, 05, 10));
+        Movie rambo = new Movie("Rambo",
+                Arrays.asList(stevenSegal, juliaRoberts, tomHanks, stevenSpilberg), LocalDate.of(1985, 05, 10));
 
-        Movie titanic = new Movie("Titanic", quentinTarantino,
-                Arrays.asList(tomCriuze, nataliaPortman, tomHanks), LocalDate.of(1995, 12, 24));
+        Movie titanic = new Movie("Titanic",
+                Arrays.asList(tomCriuze, nataliaPortman, tomHanks, quentinTarantino), LocalDate.of(1995, 12, 24));
 
-        Collections.addAll(movieLibrary,rambo,titanic);
+        Collections.addAll(movieLibrary, rambo, titanic);
 //        movieLibrary.add(rambo);
 //        movieLibrary.add(titanic);
     }
@@ -111,3 +129,4 @@ public class MovieDB {
         return option;
     }
 }
+

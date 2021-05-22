@@ -5,14 +5,12 @@ import java.util.List;
 
 public class Movie {
     String title;
-    Director director;
-    List<Actor> actorList;
+    List<Staff> staffList;
     LocalDate premiereDate;
 
-    public Movie(String title, Director director, List<Actor> actorList, LocalDate premiereDate) {
+    public Movie(String title, List<Staff> staffList, LocalDate premiereDate) {
         this.title = title;
-        this.director = director;
-        this.actorList = actorList;
+        this.staffList = staffList;
         this.premiereDate = premiereDate;
     }
 
@@ -20,8 +18,7 @@ public class Movie {
     public String toString() {
         return "Movie{" +
                 "title='" + title + '\'' +
-                ", director=" + director +
-                ", actorList=" + actorList +
+                ", staffList=" + staffList +
                 ", premiereDate=" + premiereDate +
                 '}';
     }
@@ -34,20 +31,12 @@ public class Movie {
         this.title = title;
     }
 
-    public Director getDirector() {
-        return director;
+    public List<Staff> getStaffList() {
+        return staffList;
     }
 
-    public void setDirector(Director director) {
-        this.director = director;
-    }
-
-    public List<Actor> getActorList() {
-        return actorList;
-    }
-
-    public void setActorList(List<Actor> actorList) {
-        this.actorList = actorList;
+    public void setStaffList(List<Staff> staffList) {
+        this.staffList = staffList;
     }
 
     public LocalDate getPremiereDate() {
