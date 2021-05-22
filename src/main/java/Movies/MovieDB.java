@@ -63,7 +63,18 @@ public class MovieDB {
                     System.out.println("Wypisz filmy z zakresu dat");
                     break;
                 case 4:
-                    System.out.println("Sprawdz w jakich filmach grał dany aktor");
+                    System.out.println("Sprawdz w jakich filmach grał dany aktor\n" +
+                            "Podaj imie lub nazwisko aktora");
+                    Scanner firstOrLastNameScn = new Scanner(System.in);
+                    String firstOrLastNameString = firstOrLastNameScn.nextLine();
+
+                    for(Movie movie : movieLibrary){
+                        for (Actor actor : movie.getActorList()) {
+                            if (actor.getFirstName().equals(firstOrLastNameString) || actor.getLastName().equals(firstOrLastNameString)){
+                                System.out.println(movie);
+                            }
+                        }
+                    }
                     break;
                 case 5:
                     System.out.println("Ile kosztowało wyprodukowanie danego filmu");
