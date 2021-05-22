@@ -21,7 +21,7 @@ public class MovieDB {
                     findMovieByTitle();
                     break;
                 case 3:
-                    findMovieByPremiereDate();
+                    findMovieFromDataRange();
                     break;
                 case 4:
                     findFilmForActor();
@@ -73,8 +73,31 @@ public class MovieDB {
         }
     }
 
-    private static void findMovieByPremiereDate() {
-        System.out.println("Wypisz filmy z zakresu dat");
+    private static void findMovieFromDataRange() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Wypisz filmy z zakresu dat\n" +
+                "Podaj datę od, ROK");
+        int fromYear = scanner.nextInt();
+        System.out.println("Podaj date od, MIESIAC");
+        int fromMonth = scanner.nextInt();
+        System.out.println("Podaj datę od, DZIEN");
+        int fromDay = scanner.nextInt();
+        System.out.println("Podaj datę do, ROK");
+        int toYear = scanner.nextInt();
+        System.out.println("Podaj datę do, MIESIAC");
+        int toMonth = scanner.nextInt();
+        System.out.println("Podaj datę do, DZIEN");
+        int toDay = scanner.nextInt();
+
+        LocalDate start = LocalDate.of(fromYear, fromMonth, fromDay);
+        LocalDate end = LocalDate.of(toYear, toMonth, toDay);
+
+        for (Movie movie : movieLibrary) {
+            if (movie.getPremiereDate().isAfter(start) && movie.getPremiereDate().isBefore(end) || movie.getPremiereDate().equals(start) || movie.getPremiereDate().equals(end)) {
+                System.out.println(movie);
+            }
+        }
+
     }
 
     private static void addMovie() {
@@ -101,8 +124,8 @@ public class MovieDB {
         Staff nataliaPortman = new Actor("Natalia", "Portman", 5000);
         Staff stevenSegal = new Actor("Steven", "Segal", 100000);
 
-        Director stevenSpilberg = new Director("Steven", "Spielberg", 30000);
-        Director quentinTarantino = new Director("Quentin", "Tarantino", 30000);
+        Staff stevenSpilberg = new Director("Steven", "Spielberg", 30000);
+        Staff quentinTarantino = new Director("Quentin", "Tarantino", 30000);
 
         Movie rambo = new Movie("Rambo",
                 Arrays.asList(stevenSegal, juliaRoberts, tomHanks, stevenSpilberg), LocalDate.of(1985, 05, 10));
