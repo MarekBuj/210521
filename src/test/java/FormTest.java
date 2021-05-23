@@ -12,33 +12,58 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 public class FormTest {
 
     protected WebDriver driver;
     protected WebDriverWait wait;
 
-@BeforeMethod
+    @BeforeMethod
     public void setup() {
-    //System.setProperty("webdriver.chrome.driver", "ścieżka do chromedriver");
-    WebDriverManager.chromedriver().setup();
-    ChromeOptions options = new ChromeOptions();
-    //options.addArguments("start-maximized");
-    options.addArguments("disable-extensions");
-    driver = new ChromeDriver(options);
-    driver.manage().window().setPosition(new Point(3440,0)); //NIE KOPIOWAC
-    wait = new WebDriverWait(driver, 10);
-}
+        //System.setProperty("webdriver.chrome.driver", "ścieżka do chromedriver");
+        WebDriverManager.chromedriver().setup();
+        ChromeOptions options = new ChromeOptions();
+        //options.addArguments("start-maximized");
+        options.addArguments("disable-extensions");
+        driver = new ChromeDriver(options);
+        driver.manage().window().setPosition(new Point(3440, 0)); //NIE KOPIOWAC
+        wait = new WebDriverWait(driver, 10);
+    }
 
-@Test(invocationCount = 1)
-public void shouldFillOutTheForm(){
-    driver.get("https://seleniumui.moderntester.pl/form.php");
+    @Test(invocationCount = 1)
+    public void shouldFillOutTheForm() {
+        driver.get("https://seleniumui.moderntester.pl/form.php");
 
-    wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#inputFirstName3")));
-    WebElement firstNameTextBox = driver.findElement(By.cssSelector("#inputFirstName3"));
-    firstNameTextBox.sendKeys("Jan");
-}
+        WebElement firstNameTextBox = driver.findElement(By.cssSelector("#inputFirstName3"));
+        wait.until(ExpectedConditions.visibilityOf(firstNameTextBox));
+        firstNameTextBox.sendKeys("Jan");
 
-@AfterMethod
-    public void tearDown() {driver.quit();}
+        WebElement lastNameTextBox = driver.findElement(By.cssSelector("#inputLastName3"));
+        lastNameTextBox.sendKeys("Kowalski");
+
+        WebElement emailNameTextBox = driver.findElement(By.cssSelector("#inputEmail3"));
+        emailNameTextBox.sendKeys("Jan@wp.pl");
+
+        WebElement male = driver.findElement(By.cssSelector("input[value='male']"));
+        male.click();
+
+        WebElement age = driver.findElement(By.id("inputAge3"));
+        age.sendKeys("45");
+
+        List<WebElement> years = driver.findElements(By.name("gridRadiosExperience"));
+
+        WebElement professionAuto = driver.findElement(By.id("gridCheckAutomationTester"));
+        professionAuto.click();
+
+        WebElement additionalInfo = driver.findElement(By.cssSelector("#additionalInformations"));
+        additionalInfo.sendKeys("TEST");
+
+    }
+
+    @AfterMethod
+    public void tearDown() {
+        driver.quit();
+    }
 
 }
