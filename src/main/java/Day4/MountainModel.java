@@ -8,6 +8,7 @@ import java.util.List;
 public class MountainModel {
     private String name;
     private int height;
+    private String country;
 
     public MountainModel(WebElement row) {
         List<WebElement> partsOfRow = row.findElements(By.cssSelector("td"));

@@ -14,6 +14,7 @@ public class MountainTest extends TestBase {
     @Test
     public void shouldReturnMountainsHigherThan4500(){
 
+        //dodatkowo sprawdzić, że góry są z Włoch.
         driver.get("https://seleniumui.moderntester.pl/");
 
         List<WebElement> mountainsRow = driver.findElements(By.cssSelector("tbody tr"));
