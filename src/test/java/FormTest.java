@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -76,12 +77,17 @@ public class FormTest {
         getRandomElement(seleniumCommandsOptions).click();
 
         WebElement fileInput = driver.findElement(By.id("chooseFile"));
-        File file = new File("src/main/resources/emptyFile.txt");
+        File file = new File("src\\main\\resources\\emptyFile.txt");
         fileInput.sendKeys(file.getAbsolutePath());
 
         WebElement additionalInfo = driver.findElement(By.cssSelector("#additionalInformations"));
         additionalInfo.sendKeys("TEST");
 
+        WebElement signInButton = driver.findElement(By.cssSelector(".btn.btn-primary"));
+        signInButton.click();
+
+        WebElement confirmationMessage = driver.findElement(By.cssSelector("#validator-message"));
+        Assert.assertEquals(confirmationMessage.getText(),"Form send with success");
     }
 
     @AfterMethod
