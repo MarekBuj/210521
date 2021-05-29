@@ -11,11 +11,8 @@ import java.io.File;
 import java.util.List;
 import java.util.Random;
 
-public class FormPO {
+public class FormPO extends BasePO {
 
-    protected WebDriver driver;
-    protected String ownUrl;
-    protected WebDriverWait wait;
 
 
     @FindBy(css = "#inputFirstName3")
@@ -56,6 +53,11 @@ public class FormPO {
 
     @FindBy(id = "inputAge3")
     private WebElement ageTextBox;
+
+    public FormPO(WebDriver driver) {
+        super(driver);
+        ownUrl = "https://seleniumui.moderntester.pl/form.php";
+    }
 
     public void selectRandomExperience() {
         getRandomElement(yearsOfExperience).click();
@@ -117,20 +119,7 @@ public class FormPO {
         inputLastName.sendKeys(lastName);
     }
 
-    public void openMe() {
-        driver.get(ownUrl);
-    }
 
-    public FormPO(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-        wait = new WebDriverWait(driver, 10);
-    }
 
-    public WebElement getRandomElement(List<WebElement> elements) {
-        Random rnd = new Random();
-        int randomNumber = rnd.nextInt(elements.size());
-        return elements.get(randomNumber);
 
-    }
 }

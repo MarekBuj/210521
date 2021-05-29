@@ -27,4 +27,16 @@ public class FormPoTest extends TestBase {
         Assert.assertEquals(formPO.getValidatorMessageText(), "Form send with success");
     }
 
+    @Test
+    public void progressBarTest() {
+    ProgressBarPO progressBarPO = new ProgressBarPO(driver);
+    progressBarPO.openMe();
+    Assert.assertTrue(progressBarPO.progressBarIsComplete());
+    }
+
+    @Test
+    public void testDelayedAlert(){
+
+    }
+
 }
