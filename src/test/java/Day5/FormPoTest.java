@@ -36,7 +36,11 @@ public class FormPoTest extends TestBase {
 
     @Test
     public void testDelayedAlert(){
-
+        AlertPO alertPO = new AlertPO(driver);
+        alertPO.openMe();
+        alertPO.clickDelayedAlertButton();
+        alertPO.waitForAlertAndAccept();
+        Assert.assertEquals(alertPO.getDelayedAlertLabelText(), "OK button pressed");
     }
 
 }
