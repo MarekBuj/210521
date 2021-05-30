@@ -41,4 +41,9 @@ public class TestBase {
         return elements.get(randomNumber);
 
     }
+
+    public int getRandomNumber(int max){
+        Random rnd = new Random();
+        return rnd.nextInt(max);
+    }
 }
